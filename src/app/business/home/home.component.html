@@ -1,0 +1,14 @@
+<div class="c-content-inner-not-bg">
+    <div class="row  c-mb15" [hidden]="userTipClose">
+        <div class="col-md-12">
+            <div class="card c-card">
+                <div class="card-body">
+                    <i class="fa fa-bullhorn fa-fw text-danger"></i> <strong class="text-danger">欢迎使用</strong> <span>如果不是您本人登录，请及时 <a href="javascript:void(0)" (click)="passwordEdit()">修改密码</a>                    。</span>
+                    <button aria-label="Close" class="close" type="button"  (click)="userTipClose=true">
+                       <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

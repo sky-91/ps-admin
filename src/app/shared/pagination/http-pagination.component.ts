@@ -29,7 +29,7 @@ export class HttpPaginationComponent implements OnInit {
   url: string;
 
   @Input()
-  method = 'post';
+  method: string;
 
   @Input()
   param: any = new Object();
@@ -90,6 +90,15 @@ export class HttpPaginationComponent implements OnInit {
         const toastCfg = new ToastConfig(ToastType.ERROR, '', msg, 3000);
         that.toastService.toast(toastCfg);
       });
+      // this.httpService.originalGet(this.url, serviceData).subscribe((res) => {
+      //   console.log(res);
+      //   if (res.content !== '') {
+      //     that.serverDataProcess(res);
+      //   } else {
+      //     const toastCfg = new ToastConfig(ToastType.ERROR, '', '数据请求失败！', 3000);
+      //     that.toastService.toast(toastCfg);
+      //   }
+      // });
     } else if (Utils.isNotEmpty(this.url)) {
       this.httpService.post(this.url, serviceData, function (successful, data, res) {
         if (successful) {
@@ -112,9 +121,9 @@ export class HttpPaginationComponent implements OnInit {
    * @param data 数据
    */
   private serverDataProcess(data: any) {
-    if (data && data.total && data.rows) {
+    if (data && data.total && data.content) {
       this.total = data.total;
-      this.onDataChanged.emit(data.rows);
+      this.onDataChanged.emit(data.content);
     } else {
       console.error('app-http-pagination,返回的数据格式不正确！');
     }

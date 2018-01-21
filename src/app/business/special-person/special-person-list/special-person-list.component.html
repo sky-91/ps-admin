@@ -1,0 +1,153 @@
+<div class="c-content-inner">
+  <div class="row">
+    <div class="col-md-12">
+      <p class="c-line-title">疆藏人员列表</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group row">
+        <label class="col-md-4 col-form-label text-right">管辖单位：</label>
+        <div class="col-md-6">
+          <input type="text" class="form-control" placeholder="请输入...">
+        </div>
+      </div>
+    </div>
+    <!--<div class="col-md-4">-->
+      <!--<div class="form-group row">-->
+        <!--<label class="col-md-3 col-form-label text-right">邮箱：</label>-->
+        <!--<div class="col-md-9">-->
+          <!--<input type="text" class="form-control" placeholder="请输入姓名...">-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+    <div class="col-md-4">
+      <div class="form-group">
+        <button class="btn btn-primary" (click)="search();"><i class="fa fa-search fa-fw"></i> 查询</button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <p class="c-line-title"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table-responsive" #sdt="simpleDataTable" app-simple-data-table>
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th class="text-center c-fix-w-3">
+              管辖单位
+            </th>
+            <th class="text-center c-fix-w-3">
+              资源名
+            </th>
+            <th class="text-center c-fix-w-3">
+              姓名
+            </th>
+            <th class="text-center c-fix-w-3">
+              身份证号
+            </th>
+            <th class="text-center c-fix-w-3">
+              活动场所
+            </th>
+            <th class="text-center c-fix-w-3">
+              活动场所详址
+            </th>
+            <th class="text-center c-fix-w-3">
+              活动时间
+            </th>
+            <th class="text-center c-fix-w-3">
+              推送时间
+            </th>
+            <th class="text-center c-fix-w-3">
+              户籍地
+            </th>
+            <th class="text-center c-fix-w-3">
+              民族
+            </th>
+            <th class="text-center c-fix-w-3">
+              住宿（上网）地点
+            </th>
+            <th class="text-center c-fix-w-3">
+              来津时间及事由
+            </th>
+            <th class="text-center c-fix-w-3">
+              来津方式
+            </th>
+            <th class="text-center c-fix-w-3">
+              在津住地
+            </th>
+            <th class="text-center c-fix-w-3">
+              来津联系人
+            </th>
+            <th class="text-center c-fix-w-3">
+              随身物品
+            </th>
+            <th class="text-center c-fix-w-3">
+              手机号码
+            </th>
+            <th class="text-center c-fix-w-3">
+              虚拟身份
+            </th>
+            <th class="text-center c-fix-w-3">
+              同行人员
+            </th>
+            <th class="text-center c-fix-w-3">
+              同住（同上网）人员
+            </th>
+            <th class="text-center c-fix-w-3">
+              驾乘车辆号牌
+            </th>
+            <th class="text-center c-fix-w-3">
+              有无涉恐表象特征
+            </th>
+            <th class="text-center c-fix-w-3">
+              重点人列控类型
+            </th>
+            <th class="text-center c-fix-w-4">
+              核查地点
+            </th>
+            <th class="text-center c-fix-w-3">
+              见面核查民警
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of sdt.data">
+            <td class="text-center">{{item.jurisdiction}}</td>
+            <td class="text-center">{{item.resourceName}}</td>
+            <td class="text-center">{{item.name}}</td>
+            <td class="text-center">{{item.idCard}}</td>
+            <td class="text-center">{{item.activityPlace}}</td>
+            <td class="text-center">{{item.activityPlaceDetail}}</td>
+            <td class="text-center">{{item.activityTime}}</td>
+            <td class="text-center">{{item.pushTime}}</td>
+            <td class="text-center">{{item.domicile}}</td>
+            <td class="text-center">{{item.nation}}</td>
+            <td class="text-center">{{item.stayInternetSite}}</td>
+            <td class="text-center">{{item.tjTimeReason}}</td>
+            <td class="text-center">{{item.vehicle}}</td>
+            <td class="text-center">{{item.tjStaySite}}</td>
+            <td class="text-center">{{item.tjContact}}</td>
+            <td class="text-center">{{item.belongings}}</td>
+            <td class="text-center">{{item.phone}}</td>
+            <td class="text-center">{{item.virtualIdentity}}</td>
+            <td class="text-center">{{item.peerStaff}}</td>
+            <td class="text-center">{{item.stayStaff}}</td>
+            <td class="text-center">{{item.carNum}}</td>
+            <td class="text-center">{{item.terroristChar}}</td>
+            <td class="text-center">{{item.controlType}}</td>
+            <td class="text-center">{{item.checkSite}}</td>
+            <td class="text-center">{{item.checkPolice}}</td>
+          </tr>
+          </tbody>
+        </table>
+        <app-simple-data-http-page #hp [url]="url" [method]="method" [param]="param" [pageList]="pageList"
+                                   [btnCls]="btnCls"></app-simple-data-http-page>
+      </div>
+    </div>
+  </div>
+</div>

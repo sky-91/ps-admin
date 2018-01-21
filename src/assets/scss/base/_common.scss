@@ -164,6 +164,24 @@
   width:100%
 }
 
+.c-fix-w-1{
+  width: 50px;
+}
+.c-fix-w-2{
+  width: 100px;
+}
+.c-fix-w-3{
+  width: 150px;
+}
+.c-fix-w-4{
+  width: 200px;
+}
+.c-fix-w-5{
+  width: 250px;
+}
+.c-fix-w-6{
+  width: 300px;
+}
 /**卡片**/
 .c-card {
   border: 0px;
@@ -296,7 +314,7 @@
   clear: both;
   margin-left: 30px;
   width: -moz-calc(100% - 35px);
-  width: -webkit-calc(100% -35px);
+  width: -webkit-calc(100% - 35px);
   width: calc(100% - 35px);
   border-bottom: 1px solid $c-color-gray-deep;
   padding: 15px;
@@ -354,7 +372,7 @@
   width:50px;
   height: 50px;
  }
- 
+
  .btn-sm.c-circle-btn, .btn-group-sm.c-circle-btn{
   border-radius: 100%;
   width:32px;

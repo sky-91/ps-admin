@@ -1,0 +1,137 @@
+<div class="c-content-inner">
+  <div class="row">
+    <div class="col-md-12">
+      <p class="c-line-title">重点人员列表</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group row">
+        <label class="col-md-4 col-form-label text-right">管辖单位：</label>
+        <div class="col-md-6">
+          <input type="text" class="form-control" placeholder="请输入...">
+        </div>
+      </div>
+    </div>
+    <!--<div class="col-md-4">-->
+    <!--<div class="form-group row">-->
+    <!--<label class="col-md-3 col-form-label text-right">邮箱：</label>-->
+    <!--<div class="col-md-9">-->
+    <!--<input type="text" class="form-control" placeholder="请输入姓名...">-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <div class="col-md-4">
+      <div class="form-group">
+        <button class="btn btn-primary" (click)="search();"><i class="fa fa-search fa-fw"></i> 查询</button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <p class="c-line-title"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div #sdt="simpleDataTable" app-simple-data-table>
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th class="text-center c-w-1">
+              列控关键字
+            </th>
+            <th class="text-center c-w-1">
+              群体类别
+            </th>
+            <th class="text-center c-w-2">
+              身份证号
+            </th>
+            <th class="text-center c-w-2">
+              姓名
+            </th>
+            <th class="text-center c-w-3">
+              婚姻状况
+            </th>
+            <th class="text-center c-w-3">
+              户籍地
+            </th>
+            <th class="text-center c-w-1">
+              现住地
+            </th>
+            <th class="text-center c-w-1">
+              联系方式
+            </th>
+            <th class="text-center c-w-2">
+              手机绑定微信名称
+            </th>
+            <th class="text-center c-w-1">
+              管辖单位
+            </th>
+            <th class="text-center c-w-2">
+              管辖派出所
+            </th>
+            <th class="text-center c-w-2">
+              性别
+            </th>
+            <th class="text-center c-w-1">
+              民族
+            </th>
+            <th class="text-center c-w-2">
+              年龄
+            </th>
+            <th class="text-center c-w-1">
+              学历
+            </th>
+            <th class="text-center c-w-2">
+              兵役状况
+            </th>
+            <th class="text-center c-w-1">
+              职业
+            </th>
+            <th class="text-center c-w-1">
+              服务处所
+            </th>
+            <th class="text-center c-w-1">
+              工作状态
+            </th>
+            <th class="text-center c-w-1">
+              列控事由
+            </th>
+            <th class="text-center c-w-1">
+              备注
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of sdt.data">
+            <td class="text-center">{{item.controllKeyword}}</td>
+            <td class="text-center">{{item.groupType}}</td>
+            <td class="text-center">{{item.idCard}}</td>
+            <td class="text-center">{{item.name}}</td>
+            <td class="text-center">{{item.maritalStatus}}</td>
+            <td class="text-center">{{item.domicile}}</td>
+            <td class="text-center">{{item.residence}}</td>
+            <td class="text-center">{{item.contacts[0].phone}}</td>
+            <td class="text-center">{{item.contacts[0].wechat}}</td>
+            <td class="text-center">{{item.jurisdiction}}</td>
+            <td class="text-center">{{item.juriPolice}}</td>
+            <td class="text-center">{{item.sex?'男':'女'}}</td>
+            <td class="text-center">{{item.nation}}</td>
+            <td class="text-center">{{item.age}}</td>
+            <td class="text-center">{{item.education}}</td>
+            <td class="text-center">{{item.veteranStatus}}</td>
+            <td class="text-center">{{item.job}}</td>
+            <td class="text-center">{{item.workPlace}}</td>
+            <td class="text-center">{{item.workStatus}}</td>
+            <td class="text-center">{{item.controllReason}}</td>
+            <td class="text-center">{{item.remark}}</td>
+          </tr>
+          </tbody>
+        </table>
+        <app-simple-data-http-page #hp [url]="url" [method]="method" [param]="param" [pageList]="pageList"
+                                   [btnCls]="btnCls"></app-simple-data-http-page>
+      </div>
+    </div>
+  </div>
+</div>

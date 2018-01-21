@@ -1,28 +1,27 @@
-import { Component, OnInit,ViewChild} from '@angular/core';
-import { AppService } from '../../app.service';
+import {Component, ViewChild} from '@angular/core';
+import {AppService} from '../../app.service';
 
 import {HttpPaginationComponent} from '../../shared/pagination/http-pagination.component';
 
 @Component({
-  selector: 'c-role-list',
+  selector: 'app-role-list',
   templateUrl: './role-list.component.html'
 })
-export class RoleListComponent  {
+export class RoleListComponent {
 
   @ViewChild('hp', undefined) hp: HttpPaginationComponent;
 
-  url:string="";
+  url = '';
 
-  param:any = {}
+  param: any = {};
 
+  pageList: Array<number> = [15, 25, 35];
 
-  pageList:Array<number>= [15, 25, 35]
-
-   constructor(private appService: AppService) {
-    this.appService.titleEventEmitter.emit("角色列表");
+  constructor(private appService: AppService) {
+    this.appService.titleEventEmitter.emit('角色列表');
   }
 
-  onDataChanged($event){
-    console.info($event)
+  onDataChanged($event) {
+    console.log($event);
   }
 }

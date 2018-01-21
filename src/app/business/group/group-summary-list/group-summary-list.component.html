@@ -1,0 +1,65 @@
+<div class="c-content-inner">
+  <div class="row">
+    <div class="col-md-12">
+      <p class="c-line-title">群体汇总列表</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group row">
+        <label class="col-md-4 col-form-label text-right">管辖单位：</label>
+        <div class="col-md-6">
+          <input type="text" class="form-control" placeholder="请输入...">
+        </div>
+      </div>
+    </div>
+    <!--<div class="col-md-4">-->
+    <!--<div class="form-group row">-->
+    <!--<label class="col-md-3 col-form-label text-right">邮箱：</label>-->
+    <!--<div class="col-md-9">-->
+    <!--<input type="text" class="form-control" placeholder="请输入姓名...">-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <div class="col-md-4">
+      <div class="form-group">
+        <button class="btn btn-primary" (click)="search();"><i class="fa fa-search fa-fw"></i> 查询</button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <p class="c-line-title"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div #sdt="simpleDataTable" app-simple-data-table>
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th class="text-center c-w-2">
+              群体
+            </th>
+            <th class="text-center c-w-2">
+              群体类别
+            </th>
+            <th class="text-center c-w-3">
+              群体简介
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of sdt.data">
+            <td class="text-center">{{item.groupName}}</td>
+            <td class="text-center">{{item.groupType}}</td>
+            <td class="text-center">{{item.groupIntroduce}}</td>
+          </tr>
+          </tbody>
+        </table>
+        <app-simple-data-http-page #hp [url]="url" [method]="method" [param]="param" [pageList]="pageList"
+                                   [btnCls]="btnCls"></app-simple-data-http-page>
+      </div>
+    </div>
+  </div>
+</div>

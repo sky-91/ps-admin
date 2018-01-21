@@ -1,13 +1,12 @@
-import { NgModule } from '@angular/core';
-import { CommonModule }       from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import  { PaginationModule}       from '../../shared/pagination/pagination.module';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {PaginationModule} from '../../shared/pagination/pagination.module';
 
-import { RoleRoutingModule } from './role-routing.module';
-import { RoleComponent } from './role.component';
-import { RoleAddComponent } from './role-add.component';
-import { RoleListComponent } from './role-list.component';
+import {RoleRoutingModule} from './role-routing.module';
+import {RoleComponent} from './role.component';
+import {RoleAddComponent} from './role-add.component';
+import {RoleListComponent} from './role-list.component';
 
 
 @NgModule({
@@ -22,8 +21,8 @@ import { RoleListComponent } from './role-list.component';
     RoleAddComponent,
     RoleListComponent
   ],
-  exports: [
-  ],
+  exports: [],
   providers: []
 })
-export class RoleModule { }
+export class RoleModule {
+}

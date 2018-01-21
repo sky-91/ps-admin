@@ -1,0 +1,109 @@
+<div class="c-content-inner">
+  <div class="row">
+    <div class="col-md-12">
+      <p class="c-line-title">群体活动记录</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group row">
+        <label class="col-md-4 col-form-label text-right">管辖单位：</label>
+        <div class="col-md-6">
+          <input type="text" class="form-control" placeholder="请输入...">
+        </div>
+      </div>
+    </div>
+    <!--<div class="col-md-4">-->
+    <!--<div class="form-group row">-->
+    <!--<label class="col-md-3 col-form-label text-right">邮箱：</label>-->
+    <!--<div class="col-md-9">-->
+    <!--<input type="text" class="form-control" placeholder="请输入姓名...">-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <div class="col-md-4">
+      <div class="form-group">
+        <button class="btn btn-primary" (click)="search();"><i class="fa fa-search fa-fw"></i> 查询</button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <p class="c-line-title"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div #sdt="simpleDataTable" app-simple-data-table>
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th class="text-center c-w-1">
+              群体名称
+            </th>
+            <th class="text-center c-w-1">
+              日期
+            </th>
+            <th class="text-center c-w-1">
+              分数
+            </th>
+            <th class="text-center c-w-2">
+              上访地点
+            </th>
+            <th class="text-center c-w-2">
+              所属区域
+            </th>
+            <th class="text-center c-w-3">
+              煽动方式
+            </th>
+            <th class="text-center c-w-3">
+              信息来源
+            </th>
+            <th class="text-center c-w-1">
+              维权方式（QQ群、微信群）
+            </th>
+            <th class="text-center c-w-1">
+              规模等级（人数）
+            </th>
+            <th class="text-center c-w-2">
+              上访情况
+            </th>
+            <th class="text-center c-w-1">
+              是否落实
+            </th>
+            <th class="text-center c-w-2">
+              概述
+            </th>
+            <th class="text-center c-w-2">
+              是否造成后果
+            </th>
+            <th class="text-center c-w-1">
+              是否造成后果（分值）
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of sdt.data">
+            <td class="text-center">{{item.groupName}}</td>
+            <td class="text-center">{{item.recordDate}}</td>
+            <td class="text-center">{{item.score}}</td>
+            <td class="text-center">{{item.petitionLocation}}</td>
+            <td class="text-center">{{item.petitionRegion}}</td>
+            <td class="text-center">{{item.inciteMethod}}</td>
+            <td class="text-center">{{item.infoSources}}</td>
+            <td class="text-center">{{item.actionGroup}}</td>
+            <td class="text-center">{{item.groupSize}}</td>
+            <td class="text-center">{{item.petitionDynamic}}</td>
+            <td class="text-center">{{item.confirm?'是':'否'}}</td>
+            <td class="text-center">{{item.petitionSituation}}</td>
+            <td class="text-center">{{item.consequence?'是':'否'}}</td>
+            <td class="text-center">{{item.conseScore}}</td>
+          </tr>
+          </tbody>
+        </table>
+        <app-simple-data-http-page #hp [url]="url" [method]="method" [param]="param" [pageList]="pageList"
+                                   [btnCls]="btnCls"></app-simple-data-http-page>
+      </div>
+    </div>
+  </div>
+</div>

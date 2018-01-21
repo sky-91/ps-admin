@@ -5,7 +5,7 @@ import {HttpPaginationComponent} from '../pagination/http-pagination.component';
 @Component({
   selector: 'app-simple-data-http-page',
   template: `
-    <app-http-pagination #sdhp [url]="url" method="post" [param]="param" [pageList]="pageList" [btnCls]="btnCls"
+    <app-http-pagination #sdhp [url]="url" [method]="method" [param]="param" [pageList]="pageList" [btnCls]="btnCls"
                          (onDataChanged)="onDataChanged($event)"></app-http-pagination>
   `
 })
@@ -22,7 +22,7 @@ export class SimpleDataHttpPageComponent {
   url: string;
 
   @Input()
-  method = 'post';
+  method: string;
 
   @Input()
   param: any = new Object();

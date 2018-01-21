@@ -38,12 +38,28 @@ export class HttpService {
     return params;
   }
 
+  private static buildListQueryParam(paramMap): string {
+    let paramUrl = '?';
+    for (const key in paramMap) {
+      if (key !== '') {
+        let val = paramMap[key];
+        if (val instanceof Date) {
+          val = Utils.dateFormat(val, 'yyyy-MM-dd hh:mm:ss');
+        }
+        paramUrl += key + '=' + val + '&';
+      }
+    }
+    paramUrl = paramUrl.substring(0, paramUrl.length - 1);
+    return paramUrl;
+  }
+
   public request(url: string, options: RequestOptionsArgs, success: Function, error: Function): any {
     this.spinService.spin(true);
     this.http.request(url, options).subscribe(res => {
       this.spinService.spin(false);
       success(res.ok, res.json(), res);
     }, err => {
+      console.log(err);
       this.spinService.spin(false);
       // 处理请求失败
       const msg = this.requestFailed(url, options, err);
@@ -57,8 +73,27 @@ export class HttpService {
   }): any {
     return this.request(url, new RequestOptions({
       method: RequestMethod.Get,
+      // 跨域访问带上cookie
+      withCredentials: true,
       search: HttpService.buildURLSearchParams(paramMap)
     }), success, error);
+  }
+
+
+  public originalGet(url: string, paramMap: any = null): any {
+    // const httpOptions = {
+    //   withCredentials: true,
+    //   headers: new HttpHeaders({
+    //     'Access-Control-Allow-Origin': '*',
+    //     'Content-Type': 'application/json; charset=UTF-8'
+    //   })
+    // };
+    // return this.httpClient.get(url + HttpService.buildListQueryParam(paramMap), httpOptions).map((res) => {
+    //   return res;
+    // });
+    return this.http.get(url, {params: paramMap}).map((res) => {
+      return res.json() as any;
+    });
   }
 
   public post(url: string, body: any = null, success: Function = function (successful, data, res) {

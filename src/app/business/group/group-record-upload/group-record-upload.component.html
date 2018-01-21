@@ -1,0 +1,52 @@
+<div class="c-content-inner">
+  <div class="row">
+    <div class="col-md-12">
+      <p class="c-line-title">文件上传</p>
+      <div class="row">
+        <div class="col-md-3">
+          <h5>请选择群体活动记录EXCEL文件</h5>
+          <h6 class="ng_upload_tip">提示：只能上传xls或xlsx格式的文件。一次只能上传一个文件，如要重新上传，请先删除右边的文件。</h6>
+          <input type="file" ng2FileSelect [uploader]="uploader"/>
+        </div>
+        <div class="col-md-9" style="margin-bottom: 40px">
+          <h5>文件详情</h5>
+          <table class="table">
+            <thead>
+            <tr>
+              <th width="40%">文件名</th>
+              <th>大小</th>
+              <th>上传状态</th>
+              <th width="25%">操作</th>
+            </tr>
+            </thead>
+            <tbody *ngIf="uploader.queue.length > 0">
+            <tr *ngFor="let item of uploader.queue">
+              <td><strong>{{ item?.file?.name }}</strong></td>
+              <td nowrap>{{ item?.file?.size / 1024 / 1024 | number:'.2' }} MB</td>
+              <td>
+                <div class="progress" style="margin-bottom: 0;">
+                  <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
+                </div>
+              </td>
+              <td nowrap>
+                <button type="button" class="btn btn-success btn-xs"
+                        (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+                  <span class="glyphicon glyphicon-upload"></span> Upload
+                </button>
+                <button type="button" class="btn btn-warning btn-xs"
+                        (click)="item.cancel()" [disabled]="!item.isUploading">
+                  <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                </button>
+                <button type="button" class="btn btn-danger btn-xs"
+                        (click)="item.remove()">
+                  <span class="glyphicon glyphicon-trash"></span> Remove
+                </button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

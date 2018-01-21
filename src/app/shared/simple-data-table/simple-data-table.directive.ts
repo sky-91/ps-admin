@@ -54,14 +54,14 @@ export class SimpleDataTableDirective implements OnChanges {
     let data = this.refData;
     const sortBy = this.sortBy;
     if (typeof sortBy === 'string' || sortBy instanceof String) {
-      data = _.orderBy(data, this.caseInsensitiveIteratee(<string>sortBy), [this.sortOrder]);
+      data = _.orderBy(data, this.caseInsensitiveIterate(<string>sortBy), [this.sortOrder]);
     } else {
       data = _.orderBy(data, sortBy, [this.sortOrder]);
     }
     this.data = data;
   }
 
-  private caseInsensitiveIteratee(sortBy: string) {
+  private caseInsensitiveIterate(sortBy: string) {
     return (row: any): any => {
       let value = row;
       for (const sortByProperty of sortBy.split('.')) {

@@ -163,7 +163,14 @@
 .c-w-12{
   width:100%
 }
-
+.c-no-warp{
+  word-break: keep-all;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+.text-center{
+  vertical-align: middle !important;
+}
 .c-fix-w-1{
   width: 50px;
 }

@@ -49,21 +49,21 @@ export class MainComponent implements OnInit {
           'name': '疆藏人员导入',
           'keyWord': 'jzrydr',
           'icon': 'fa-upload',
-          'url': 'app/special-person/special-person-upload'
+          'url': '/app/special-person/special-person-upload'
         }, {
           'id': '10200',
           'parentId': '10000',
           'name': '疆藏人员录入',
           'keyWord': 'jzrylr',
           'icon': 'fa-plus-circle',
-          'url': '/app/home'
+          'url': '/app/special-person/special-person-new'
         }, {
           'id': '10300',
           'parentId': '10000',
           'name': '疆藏人员列表',
           'keyWord': 'jzrylb',
           'icon': 'fa-table',
-          'url': 'app/special-person/special-person-list'
+          'url': '/app/special-person/special-person-list'
         }]
       }, {
         'id': '20000',
@@ -84,7 +84,7 @@ export class MainComponent implements OnInit {
           'name': '重点人员录入',
           'keyWord': 'zdrylr',
           'icon': 'fa-plus-circle',
-          'url': '/app/home'
+          'url': '/app/important-person/important-person-new'
         }, {
           'id': '20300',
           'parentId': '20000',
@@ -105,14 +105,14 @@ export class MainComponent implements OnInit {
           'name': '轨迹积分录入',
           'keyWord': 'gjjflr',
           'icon': 'fa-plus-circle',
-          'url': '/app/home'
+          'url': '/app/important-person/i-p-record-new'
         }, {
           'id': '20600',
           'parentId': '20000',
           'name': '轨迹积分列表',
           'keyWord': 'gjjflb',
           'icon': 'fa-table',
-          'url': '/app/home'
+          'url': '/app/important-person/i-p-record-list'
         }]
       }, {
         'id': '30000',
@@ -130,26 +130,33 @@ export class MainComponent implements OnInit {
         }, {
           'id': '30200',
           'parentId': '30000',
+          'name': '汇总信息录入',
+          'keyWord': 'hzxxlr',
+          'icon': 'fa-plus-circle',
+          'url': '/app/group/group-summary-new'
+        }, {
+          'id': '30300',
+          'parentId': '30000',
           'name': '汇总信息列表',
           'keyWord': 'hzxxlb',
           'icon': 'fa-table',
           'url': '/app/group/group-summary-list'
         }, {
-          'id': '30300',
+          'id': '30400',
           'parentId': '30000',
           'name': '活动记录导入',
           'keyWord': 'hdjldr',
           'icon': 'fa-upload',
           'url': '/app/group/group-record-upload'
         }, {
-          'id': '30400',
+          'id': '30500',
           'parentId': '30000',
           'name': '活动记录录入',
           'keyWord': 'hdjllr',
           'icon': 'fa-plus-circle',
-          'url': '/app/home'
+          'url': '/app/group/group-record-new'
         }, {
-          'id': '30500',
+          'id': '30600',
           'parentId': '30000',
           'name': '活动记录列表',
           'keyWord': 'hdjllb',

@@ -8,28 +8,65 @@
     <div class="col-md-4">
       <div class="form-group row">
         <label class="col-md-4 col-form-label text-right">管辖单位：</label>
-        <div class="col-md-6">
-          <input type="text" class="form-control" placeholder="请输入...">
+        <div class="col-md-8">
+          <input [(ngModel)]="jurisdiction" type="text" class="form-control" placeholder="请输入...">
         </div>
       </div>
     </div>
-    <!--<div class="col-md-4">-->
-      <!--<div class="form-group row">-->
-        <!--<label class="col-md-3 col-form-label text-right">邮箱：</label>-->
-        <!--<div class="col-md-9">-->
-          <!--<input type="text" class="form-control" placeholder="请输入姓名...">-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
+    <div class="col-md-4">
+      <div class="form-group row">
+        <label class="col-md-4 col-form-label text-right">资源名：</label>
+        <div class="col-md-8">
+          <input [(ngModel)]="resourceName" type="text" class="form-control" placeholder="请输入...">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group row">
+        <label class="col-md-4 col-form-label text-right">人员类型：</label>
+        <div class="col-md-8">
+          <select class="c-w-4 c-fix-h-2 form-control" [(ngModel)]="personType">
+            <option value="">全部</option>
+            <option value="false">新疆</option>
+            <option value="true">西藏</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group row">
+        <label class="col-md-4 col-form-label text-right">活动时间：</label>
+        <div class="col-md-8">
+          <input [(ngModel)]="startActivityTime" [readonly]="true" [dpDayPicker]="timePickerConfig"
+                 [theme]="'dp-material'"
+                 [mode]="'daytime'" class="form-control" placeholder="起始时间"/>
+          <label class="c-mt5">至</label>
+          <input [(ngModel)]="endActivityTime" [readonly]="true" [dpDayPicker]="timePickerConfig"
+                 [theme]="'dp-material'"
+                 [mode]="'daytime'" class="form-control" placeholder="终止时间"/>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group row">
+        <label class="col-md-4 col-form-label text-right">推送日期：</label>
+        <div class="col-md-8">
+          <input [(ngModel)]="startPushTime" [readonly]="true" [dpDayPicker]="datePickerConfig" [theme]="'dp-material'"
+                 [mode]="'day'" class="form-control" placeholder="起始日期"/>
+          <label class="c-mt5">至</label>
+          <input [(ngModel)]="endPushTime" [readonly]="true" [dpDayPicker]="datePickerConfig" [theme]="'dp-material'"
+                 [mode]="'day'" class="form-control" placeholder="终止日期"/>
+        </div>
+      </div>
+    </div>
     <div class="col-md-4">
       <div class="form-group">
         <button class="btn btn-primary" (click)="search();"><i class="fa fa-search fa-fw"></i> 查询</button>
+        <label class="c-w-1-6"></label>
+        <button class="btn btn-outline-primary" (click)="export();"><i class="fa fa-download fa-fw"></i> 导出</button>
+        <label class="c-w-1-6"></label>
+        <button class="btn btn-outline-light" (click)="clear();"><i class="fa fa-refresh fa-fw"></i> 清空</button>
       </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <p class="c-line-title"></p>
     </div>
   </div>
   <div class="row">
@@ -38,6 +75,9 @@
         <table class="table table-bordered">
           <thead>
           <tr>
+            <th class="text-center c-no-warp">
+              &nbsp;&nbsp;操作&nbsp;&nbsp;
+            </th>
             <th class="text-center c-no-warp">
               管辖单位
             </th>
@@ -117,10 +157,20 @@
           </thead>
           <tbody>
           <tr *ngFor="let item of sdt.data">
+            <td class="text-center">
+              <a href="javascript:;" (click)="forwardEdit(item.idCard);"><i class="fa fa-edit fa-fw"></i></a>
+              <a href="javascript:;" (click)="deletePopup(template, item.idCard, item.name);">
+                <i class="fa fa-trash fa-fw"></i>
+              </a>
+            </td>
             <td class="text-center">{{item.jurisdiction}}</td>
             <td class="text-center">{{item.resourceName}}</td>
-            <td class="text-center">{{item.name}}</td>
-            <td class="text-center">{{item.idCard}}</td>
+            <td class="text-center">
+              <a href="javascript:;" (click)="forwardDetail(item.idCard);">{{item.name}}</a>
+            </td>
+            <td class="text-center">
+              <a href="javascript:;" (click)="forwardDetail(item.idCard);">{{item.idCard}}</a>
+            </td>
             <td class="text-center">{{item.activityPlace}}</td>
             <td class="text-center">{{item.activityPlaceDetail}}</td>
             <td class="text-center">{{item.activityTime}}</td>
@@ -151,3 +201,18 @@
     </div>
   </div>
 </div>
+<ng-template #template>
+  <div class="modal-header">
+    <h5 class="modal-title pull-left">提示</h5>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body text-center">
+    <label>确定删除 {{deleteName}}?</label>
+  </div>
+  <div class="modal-footer text-center">
+    <button type="button" class="btn btn-default" (click)="confirmDelete()">确定</button>
+    <button type="button" class="btn btn-primary" (click)="modalRef.hide()">取消</button>
+  </div>
+</ng-template>

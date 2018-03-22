@@ -20,7 +20,7 @@ import {HttpPaginationMethod, PaginationType} from './pagination-model';
 export class HttpPaginationComponent implements OnInit {
 
   @Input()
-  pageList: Array<number> = [10, 20, 30, 50, 100, 150, 200];
+  pageList: Array<number> = [15, 25, 50, 100];
 
   @Input()
   btnCls = 'btn-light';
@@ -90,15 +90,6 @@ export class HttpPaginationComponent implements OnInit {
         const toastCfg = new ToastConfig(ToastType.ERROR, '', msg, 3000);
         that.toastService.toast(toastCfg);
       });
-      // this.httpService.originalGet(this.url, serviceData).subscribe((res) => {
-      //   console.log(res);
-      //   if (res.content !== '') {
-      //     that.serverDataProcess(res);
-      //   } else {
-      //     const toastCfg = new ToastConfig(ToastType.ERROR, '', '数据请求失败！', 3000);
-      //     that.toastService.toast(toastCfg);
-      //   }
-      // });
     } else if (Utils.isNotEmpty(this.url)) {
       this.httpService.post(this.url, serviceData, function (successful, data, res) {
         if (successful) {

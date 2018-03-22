@@ -36,7 +36,7 @@ export class PaginationDemoComponent {
 
   options: any = {
     total: 60, // 总条数
-    pageList: [15, 25, 35] // 每页显示条数
+    pageList: [15, 25, 50, 100] // 每页显示条数
   };
 
 
@@ -51,7 +51,7 @@ export class PaginationDemoComponent {
   changeData() {
     this.options = {
       total: 10, // 总条数
-      pageList: [10, 15, 20] // 每页显示条数
+      pageList: [15, 25, 50, 100] // 每页显示条数
 
     };
   }

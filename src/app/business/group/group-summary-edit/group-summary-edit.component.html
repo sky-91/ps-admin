@@ -1,0 +1,79 @@
+<form [formGroup]="summaryForm">
+  <div class="c-content-inner c-font-bold">
+    <div class="row">
+      <div class="col-md-8">
+        <p class="c-line-title">基础信息</p>
+      </div>
+      <div class="col-md-4 text-right">
+        <button class="col-md-2 btn btn-primary" (click)="goList();">返回
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group row c-ml10">
+          <label class="col-md-8 col-form-label text-left"><span class="c-text-required">*</span>群体名称：</label>
+          <div class="col-md-9">
+            <input formControlName="groupName" [readonly]="isEdit" type="text" maxlength="30" class="form-control" value="{{summary.groupName}}"
+                   placeholder="必填项">
+            <div class="c-validator-invalid"
+                 [hidden]="!(summaryForm.controls['groupName'].errors && summaryForm.controls['groupName'].dirty)">
+              名称必填，1-30位！
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group row c-ml10">
+          <label class="col-md-8 col-form-label text-left">群体类别：</label>
+          <div class="col-md-9">
+            <input [(ngModel)]="summary.groupType" type="text" maxlength="20" class="form-control"
+                   [ngModelOptions]="{standalone: true}">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group row c-ml10">
+          <label class="col-md-7 col-form-label text-left">群体简介：</label>
+          <div class="col-md-7">
+          <textarea [(ngModel)]="summary.groupIntroduce" maxlength="200" [ngModelOptions]="{standalone: true}"
+                    class="form-control c-textarea-200" placeholder="输入不得超过200字"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-content-inner c-mt10">
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4 c-mt10">
+        <div class="form-group row c-ml10">
+          <div *ngIf="!isEdit" class="col-md-9">
+            <button class="col-md-12 btn btn-primary" [disabled]="!summaryForm.valid" (click)="submit(template);">保存
+            </button>
+          </div>
+          <div *ngIf="isEdit" class="col-md-9">
+            <button class="col-md-12 btn btn-primary" [disabled]="!summaryForm.valid" (click)="submit(template);">修改
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4"></div>
+    </div>
+  </div>
+</form>
+<ng-template #template>
+  <div class="modal-header">
+    <h5 class="modal-title pull-left">提示</h5>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body text-center">
+    <label>{{summary.groupName}} 提交成功!</label>
+  </div>
+  <div class="modal-footer text-center">
+    <button type="button" class="btn btn-default" (click)="returnHome()">返回首页</button>
+    <button type="button" class="btn btn-primary" (click)="returnList()">返回列表页</button>
+  </div>
+</ng-template>

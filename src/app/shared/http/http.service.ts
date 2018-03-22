@@ -43,14 +43,29 @@ export class HttpService {
     for (const key in paramMap) {
       if (key !== '') {
         let val = paramMap[key];
-        if (val instanceof Date) {
-          val = Utils.dateFormat(val, 'yyyy-MM-dd hh:mm:ss');
+        if (val !== undefined && val !== '') {
+          if (val instanceof Date) {
+            val = Utils.dateFormat(val, 'yyyy-MM-dd hh:mm:ss');
+          }
+          paramUrl += key + '=' + val + '&';
         }
-        paramUrl += key + '=' + val + '&';
       }
     }
     paramUrl = paramUrl.substring(0, paramUrl.length - 1);
     return paramUrl;
+  }
+
+  private static handleBody(body: any): void {
+    for (const key in body) {
+      if (key !== '' && typeof body[key] === 'string') {
+        body[key] = body[key].trim();
+      }
+    }
+  }
+
+
+  public export(url: string, paramMap: any): void {
+    window.open(url + HttpService.buildListQueryParam(paramMap));
   }
 
   public request(url: string, options: RequestOptionsArgs, success: Function, error: Function): any {
@@ -99,10 +114,13 @@ export class HttpService {
   public post(url: string, body: any = null, success: Function = function (successful, data, res) {
   }, error: Function = function (successful, msg, err) {
   }): any {
+    HttpService.handleBody(body);
     return this.request(url, new RequestOptions({
       method: RequestMethod.Post,
+      withCredentials: true,
       body: body,
       headers: new Headers({
+        'Access-Control-Allow-Origin': '*',
         'Content-Type': 'application/json; charset=UTF-8'
       })
     }), success, error);
@@ -110,7 +128,8 @@ export class HttpService {
 
   public originalPost(url: string, body: any = null): any {
     const httpOptions = {
-      headers: new HttpHeaders({'Content-Type': 'application/json; charset=UTF-8'})
+      headers: new HttpHeaders({'Content-Type': 'application/json; charset=UTF-8'}),
+      withCredentials: true
     };
     return this.httpClient.post(url, body, httpOptions);
   }
@@ -130,6 +149,7 @@ export class HttpService {
   public put(url: string, body: any = null, success: Function = function (successful, data, res) {
   }, error: Function = function (successful, msg, err) {
   }): any {
+    HttpService.handleBody(body);
     return this.request(url, new RequestOptions({
       method: RequestMethod.Put,
       body: body

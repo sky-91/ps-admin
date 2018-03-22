@@ -10,7 +10,7 @@
                 <form [formGroup]="loginForm">
                     <div class="form-group row">
                         <div class="col-12">
-                            <input class="form-control " type="text" formControlName="userName" placeholder="请输入用户名...">
+                            <input class="form-control" type="text" formControlName="userName" placeholder="请输入用户名...">
                             <div class="c-validator-invalid" [hidden]="!(loginForm.controls['userName'].errors && loginForm.controls['userName'].dirty)">
                                 用户名必填，3-15位！
                             </div>

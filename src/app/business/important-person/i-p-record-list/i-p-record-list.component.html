@@ -1,0 +1,170 @@
+<div class="c-content-inner">
+  <div class="row">
+    <div class="col-md-12">
+      <p class="c-line-title">轨迹积分列表</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group row">
+        <label class="col-md-4 col-form-label text-right">身份证号：</label>
+        <div class="col-md-8">
+          <input [(ngModel)]="idCard" type="text" class="form-control" placeholder="请输入...">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group row">
+        <label class="col-md-4 col-form-label text-right">上访区域：</label>
+        <div class="col-md-8">
+          <input [(ngModel)]="petitionRegion" type="text" class="form-control" placeholder="请输入...">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group row">
+        <label class="col-md-4 col-form-label text-right">信息来源：</label>
+        <div class="col-md-8">
+          <input [(ngModel)]="infoSources" type="text" class="form-control" placeholder="请输入...">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 c-fix-h-3">
+      <div class="form-group row">
+        <label class="col-md-4 col-form-label text-right">轨迹类型：</label>
+        <div class="col-md-8">
+          <input [(ngModel)]="inciteMethod" type="text" class="form-control" placeholder="请输入...">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8 c-fix-h-3">
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label text-right">记录日期：</label>
+        <div class="col-md-5">
+          <input [(ngModel)]="startRecordDate" [readonly]="true" [dpDayPicker]="datePickerConfig"
+                 [theme]="'dp-material'" [mode]="'day'" class="form-control col-md-5 c-input-inline"
+                 placeholder="起始日期"/>
+          <label class="col-md-2 c-input-inline text-center c-mt5">至</label>
+          <input [(ngModel)]="endRecordDate" [readonly]="true" [dpDayPicker]="datePickerConfig" [theme]="'dp-material'"
+                 [mode]="'day'" class="form-control col-md-5 c-input-inline" placeholder="终止日期"/>
+        </div>
+        <div class="col-md-5 text-right">
+          <button class="btn btn-primary" (click)="search();"><i class="fa fa-search fa-fw"></i> 查询</button>
+          <label class="c-w-1-6"></label>
+          <button class="btn btn-outline-primary" (click)="export();"><i class="fa fa-download fa-fw"></i> 导出</button>
+          <label class="c-w-1-6"></label>
+          <button class="btn btn-outline-light" (click)="clear();"><i class="fa fa-refresh fa-fw"></i> 清空</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table-responsive" #sdt="simpleDataTable" app-simple-data-table>
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th class="text-center c-no-warp">
+              &nbsp;&nbsp;操作&nbsp;&nbsp;
+            </th>
+            <th class="text-center c-no-warp">
+              日期
+            </th>
+            <th class="text-center c-no-warp">
+              群体类别
+            </th>
+            <th class="text-center c-no-warp">
+              身份证号
+            </th>
+            <th class="text-center c-no-warp">
+              &nbsp;&nbsp;姓名&nbsp;&nbsp;
+            </th>
+            <th class="text-center c-no-warp">
+              上访地点
+            </th>
+            <th class="text-center c-no-warp">
+              上访区域
+            </th>
+            <th class="text-center c-no-warp">
+              上访动态
+            </th>
+            <th class="text-center c-no-warp">
+              信息来源
+            </th>
+            <th class="text-center c-no-warp">
+              轨迹类型
+            </th>
+            <th class="text-center c-no-warp">
+              情况简介
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of sdt.data">
+            <td class="text-center">
+              <a href="javascript:;" (click)="forwardEdit(item.pk);"><i class="fa fa-edit fa-fw"></i></a>
+              <a href="javascript:;" (click)="deletePopup(template, item.pk, item.name);">
+                <i class="fa fa-trash fa-fw"></i>
+              </a>
+            </td>
+            <td class="text-center">{{item.recordDate}}</td>
+            <td class="text-center">{{item.groupType}}</td>
+            <td class="text-center">
+              <a href="javascript:;" (click)="forwardDetail(item.pk);">{{item.idCard}}</a>
+            </td>
+            <td class="text-center">
+              <a href="javascript:;" (click)="forwardDetail(item.pk);">{{item.name}}</a>
+            </td>
+            <td class="text-center">{{item.petitionLocation}}</td>
+            <td class="text-center">{{item.petitionRegion}}</td>
+            <td class="text-center">{{item.petitionDynamic}}</td>
+            <td class="text-center">{{item.infoSources}}</td>
+            <td class="text-center">{{item.inciteMethod}}</td>
+            <td *ngIf="item.petitionSituation !== null && item.petitionSituation.length>10" class="text-center">
+              {{item.petitionSituation.substr(0,10)}}
+              <a href="javascript:;" (click)="introPopup(introTemplate, item.petitionSituation);">
+                <i class="fa fa-tag fa-fw"></i>
+              </a>
+            </td>
+            <td *ngIf="item.petitionSituation !== null && item.petitionSituation.length<=10" class="text-center">
+              {{item.petitionSituation}}
+            </td>
+            <td *ngIf="item.petitionSituation === null"></td>
+          </tr>
+          </tbody>
+        </table>
+        <app-simple-data-http-page #hp [url]="url" [method]="method" [param]="param" [pageList]="pageList"
+                                   [btnCls]="btnCls"></app-simple-data-http-page>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #template>
+  <div class="modal-header">
+    <h5 class="modal-title pull-left">提示</h5>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body text-center">
+    <label>确定删除 {{deleteName}}?</label>
+  </div>
+  <div class="modal-footer text-center">
+    <button type="button" class="btn btn-default" (click)="confirmDelete()">确定</button>
+    <button type="button" class="btn btn-primary" (click)="modalRef.hide()">取消</button>
+  </div>
+</ng-template>
+<ng-template #introTemplate>
+  <div class="modal-header">
+    <h5 class="modal-title pull-left">上访情况简介</h5>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="introRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body text-center">
+    <label>{{content}}</label>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="introRef.hide()">关闭</button>
+  </div>
+</ng-template>

@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AppService} from '../../../app.service';
 import {FileUploader} from 'ng2-file-upload';
-
-const URL = '/group/upload';
+import {UserBusinessService} from '../../../business-service/user/user-business.service';
 
 @Component({
   selector: 'app-group-summary-upload',
@@ -11,12 +10,15 @@ const URL = '/group/upload';
 })
 export class GroupSummaryUploadComponent implements OnInit {
 
-  constructor(private appService: AppService) {
+  URL: string = this.userBusinessService.uploadGroupSummary();
+
+  constructor(private appService: AppService,
+              private userBusinessService: UserBusinessService) {
     this.appService.titleEventEmitter.emit('群体汇总信息导入');
   }
 
   public uploader: FileUploader = new FileUploader({
-    allowedFileType: ['xls', 'xlsx'], queueLimit: 1, url: URL
+    allowedFileType: ['xls', 'xlsx'], queueLimit: 1, url: this.URL
   });
 
   ngOnInit() {

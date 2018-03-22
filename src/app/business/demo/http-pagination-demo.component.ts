@@ -41,7 +41,7 @@ export class HttpPaginationDemoComponent {
     age: 16
   };
 
-  pageList: Array<number> = [15, 25, 35];
+  pageList: Array<number> = [15, 25, 50, 100];
 
   btnCls = 'btn-outline-info';
 
@@ -57,7 +57,7 @@ export class HttpPaginationDemoComponent {
     this.param.age = 20;
     this.param.name = 'admin2';
     this.param.sex = '男';
-    this.pageList = [10, 15, 20];
+    this.pageList = [15, 25, 50, 100];
     this.hp.search();
   }
 

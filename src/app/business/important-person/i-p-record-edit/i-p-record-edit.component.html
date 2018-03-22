@@ -1,0 +1,245 @@
+<form [formGroup]="recordForm">
+  <div class="c-content-inner c-font-bold">
+    <div class="row">
+      <div class="col-md-8">
+        <p class="c-line-title">基础信息</p>
+      </div>
+      <div class="col-md-4 text-right">
+        <button class="col-md-2 btn btn-primary" (click)="goList();">返回</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group row c-ml10">
+          <label class="col-md-8 col-form-label text-left"><span class="c-text-required">*</span>姓名：</label>
+          <div class="col-md-9">
+            <input formControlName="name" type="text" maxlength="20" class="form-control" value="{{record.name}}"
+                   placeholder="必填项">
+            <div class="c-validator-invalid"
+                 [hidden]="!(recordForm.controls['name'].errors && recordForm.controls['name'].dirty)">
+              姓名必填，1-20位！
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group row c-ml10">
+          <label class="col-md-8 col-form-label text-left"><span class="c-text-required">*</span>身份证：</label>
+          <div class="col-md-9">
+            <input formControlName="idCard" [readonly]="isEdit" type="text" (keypress)="onKeyPress($event)"
+                   value="{{record.idCard}}" class="form-control" placeholder="必填项">
+            <div class="c-validator-invalid"
+                 [hidden]="!(recordForm.controls['idCard'].errors && recordForm.controls['idCard'].dirty)">
+              18位身份证验证错误！
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group row c-ml10">
+          <label class="col-md-12 col-form-label text-left">分数：</label>
+          <div class="col-md-8">
+            <input [(ngModel)]="record.score" [ngModelOptions]="{standalone: true}" type="number" min="0"
+                   class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group row c-ml10">
+          <label class="col-md-8 col-form-label text-left">QQ群：</label>
+          <div class="col-md-9">
+            <input [(ngModel)]="record.qqGroup" [ngModelOptions]="{standalone: true}" maxlength="15" type="text"
+                   class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group row c-ml10">
+          <label class="col-md-8 col-form-label text-left">微信群：</label>
+          <div class="col-md-9">
+            <input [(ngModel)]="record.wechatGroup" [ngModelOptions]="{standalone: true}" maxlength="15" type="text"
+                   class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group row c-ml10">
+          <label class="col-md-12 col-form-label text-left">规模等级：</label>
+          <div class="col-md-8">
+            <input [(ngModel)]="record.groupSize" [ngModelOptions]="{standalone: true}" type="number" min="0" max="5000"
+                   class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group row c-ml10">
+          <label class="col-md-8 col-form-label text-left">群体类别：</label>
+          <div class="col-md-9">
+            <input [(ngModel)]="record.groupType" [ngModelOptions]="{standalone: true}" maxlength="5" type="text"
+                   class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group row c-ml10">
+          <label class="col-md-8 col-form-label text-left">日期：</label>
+          <div class="col-md-9">
+            <input [(ngModel)]="record.recordDate" [ngModelOptions]="{standalone: true}" [readonly]="true"
+                   [dpDayPicker]="datePickerConfig" [theme]="'dp-material'" [mode]="'day'" class="form-control"/>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group row c-ml10">
+          <label class="col-md-12 col-form-label text-left">星期：</label>
+          <div class="col-md-12">
+            <select class="c-w-7 c-fix-h-2 form-control" [(ngModel)]="record.week"
+                    [ngModelOptions]="{standalone: true}">
+              <option value="一">一</option>
+              <option value="二">二</option>
+              <option value="三">三</option>
+              <option value="四">四</option>
+              <option value="五">五</option>
+              <option value="六">六</option>
+              <option value="日">日</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-content-inner c-mt10 c-font-bold">
+    <div class="row">
+      <div class="col-md-12">
+        <p class="c-line-title">活动轨迹</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group row c-ml10">
+          <label class="col-md-8 col-form-label text-left">轨迹类型：</label>
+          <div class="col-md-9">
+            <select class="form-control c-fix-h-2" [(ngModel)]="record.inciteMethod"
+                    [ngModelOptions]="{standalone: true}">
+              <option value="网络煽动">网络煽动</option>
+              <option value="传统聚集">传统聚集</option>
+              <option value="个人">个人</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group row c-ml10">
+          <label class="col-md-8 col-form-label text-left">上访地点：</label>
+          <div class="col-md-9">
+            <input [(ngModel)]="record.petitionLocation" [ngModelOptions]="{standalone: true}" maxlength="5" type="text"
+                   class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group row c-ml10">
+          <label class="col-md-8 col-form-label text-left">上访区域：</label>
+          <div class="col-md-9">
+            <input [(ngModel)]="record.petitionRegion" [ngModelOptions]="{standalone: true}" maxlength="2" type="text"
+                   class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group row c-ml10">
+          <label class="col-md-8 col-form-label text-left">上访动态：</label>
+          <div class="col-md-9">
+            <select class="form-control c-fix-h-2" [(ngModel)]="record.petitionDynamic"
+                    [ngModelOptions]="{standalone: true}">
+              <option value="进京未实施">进京未实施</option>
+              <option value="进京已实施">进京已实施</option>
+              <option value="天津未实施">天津未实施</option>
+              <option value="天津已实施">天津已实施</option>
+              <option value="常规管控">常规管控</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group row c-ml10">
+          <label class="col-md-8 col-form-label text-left">是否落实：</label>
+          <div class="col-md-9">
+            <select class="form-control c-fix-h-2" [(ngModel)]="record.confirm" [ngModelOptions]="{standalone: true}">
+              <option value="false">否</option>
+              <option value="true">是</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group row c-ml10">
+          <label class="col-md-8 col-form-label text-left">信息来源：</label>
+          <div class="col-md-9">
+            <input [(ngModel)]="record.infoSources" [ngModelOptions]="{standalone: true}" maxlength="5" type="text"
+                   class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group row c-ml10">
+          <label class="col-md-8 col-form-label text-left">是否造成后果：</label>
+          <div class="col-md-9">
+            <select class="form-control c-fix-h-2" [(ngModel)]="record.consequence"
+                    [ngModelOptions]="{standalone: true}">
+              <option value="false">否</option>
+              <option value="true">是</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group row c-ml10">
+          <label class="col-md-8 col-form-label text-left">造成后果分数：</label>
+          <div class="col-md-9">
+            <input [(ngModel)]="record.conseScore" [ngModelOptions]="{standalone: true}" type="number" min="0"
+                   max="1000" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group row c-ml10">
+          <label class="col-md-7 col-form-label text-left">上访情况简介：</label>
+          <div class="col-md-7">
+          <textarea [(ngModel)]="record.petitionSituation" [ngModelOptions]="{standalone: true}" maxlength="200"
+                    class="form-control c-textarea-200"
+                    placeholder="输入不得超过200字"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-content-inner c-mt10">
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4 c-mt10">
+        <div class="form-group row c-ml10">
+          <div class="col-md-9">
+            <button class="col-md-12 btn btn-primary" (click)="submit(template);">提交</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4"></div>
+    </div>
+  </div>
+</form>
+<ng-template #template>
+  <div class="modal-header">
+    <h5 class="modal-title pull-left">提示</h5>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body text-center">
+    <label>{{record.name}} 提交成功!</label>
+  </div>
+  <div class="modal-footer text-center">
+    <button type="button" class="btn btn-default" (click)="returnHome()">返回首页</button>
+    <button type="button" class="btn btn-primary" (click)="returnList()">返回列表页</button>
+  </div>
+</ng-template>

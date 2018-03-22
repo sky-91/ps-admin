@@ -13,7 +13,7 @@ export class SimpleDataHttpPageComponent {
   @ViewChild('sdhp', undefined) sdhp: HttpPaginationComponent;
 
   @Input()
-  pageList?: Array<number> = [10, 20, 30, 50, 100, 150, 200];
+  pageList?: Array<number> = [15, 25, 50, 100];
 
   @Input()
   btnCls? = 'btn-light';

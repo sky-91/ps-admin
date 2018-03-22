@@ -7,29 +7,55 @@
   <div class="row">
     <div class="col-md-4">
       <div class="form-group row">
-        <label class="col-md-4 col-form-label text-right">管辖单位：</label>
-        <div class="col-md-6">
-          <input type="text" class="form-control" placeholder="请输入...">
+        <label class="col-md-4 col-form-label text-right">群体名称：</label>
+        <div class="col-md-8">
+          <input [(ngModel)]="groupName" type="text" class="form-control" placeholder="请输入...">
         </div>
       </div>
     </div>
-    <!--<div class="col-md-4">-->
-    <!--<div class="form-group row">-->
-    <!--<label class="col-md-3 col-form-label text-right">邮箱：</label>-->
-    <!--<div class="col-md-9">-->
-    <!--<input type="text" class="form-control" placeholder="请输入姓名...">-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
     <div class="col-md-4">
-      <div class="form-group">
-        <button class="btn btn-primary" (click)="search();"><i class="fa fa-search fa-fw"></i> 查询</button>
+      <div class="form-group row">
+        <label class="col-md-4 col-form-label text-right">上访地点：</label>
+        <div class="col-md-8">
+          <input [(ngModel)]="petitionLocation" type="text" class="form-control" placeholder="请输入...">
+        </div>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <p class="c-line-title"></p>
+    <div class="col-md-4">
+      <div class="form-group row">
+        <label class="col-md-4 col-form-label text-right">所属区域：</label>
+        <div class="col-md-8">
+          <input [(ngModel)]="petitionRegion" type="text" class="form-control" placeholder="请输入...">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 c-fix-h-3">
+      <div class="form-group row">
+        <label class="col-md-4 col-form-label text-right">轨迹类型：</label>
+        <div class="col-md-8">
+          <input [(ngModel)]="inciteMethod" type="text" class="form-control" placeholder="请输入...">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8 c-fix-h-3">
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label text-right">记录日期：</label>
+        <div class="col-md-5">
+          <input [(ngModel)]="startRecordDate" [readonly]="true" [dpDayPicker]="datePickerConfig"
+                 [theme]="'dp-material'" [mode]="'day'" class="form-control col-md-5 c-input-inline"
+                 placeholder="起始日期"/>
+          <label class="col-md-2 c-input-inline text-center c-mt5">至</label>
+          <input [(ngModel)]="endRecordDate" [readonly]="true" [dpDayPicker]="datePickerConfig" [theme]="'dp-material'"
+                 [mode]="'day'" class="form-control col-md-5 c-input-inline" placeholder="终止日期"/>
+        </div>
+        <div class="col-md-5 text-right">
+          <button class="btn btn-primary" (click)="search();"><i class="fa fa-search fa-fw"></i> 查询</button>
+          <label class="c-w-1-6"></label>
+          <button class="btn btn-outline-primary" (click)="export();"><i class="fa fa-download fa-fw"></i> 导出</button>
+          <label class="c-w-1-6"></label>
+          <button class="btn btn-outline-light" (click)="clear();"><i class="fa fa-refresh fa-fw"></i> 清空</button>
+        </div>
+      </div>
     </div>
   </div>
   <div class="row">
@@ -39,65 +65,49 @@
           <thead>
           <tr>
             <th class="text-center c-no-warp">
+              &nbsp;&nbsp;操作&nbsp;&nbsp;
+            </th>
+            <th class="text-center c-no-warp">
               群体名称
             </th>
             <th class="text-center c-no-warp">
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日期&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </th>
             <th class="text-center c-no-warp">
-              分数
-            </th>
-            <th class="text-center c-no-warp">
-              上访地点
-            </th>
-            <th class="text-center c-no-warp">
               所属区域
             </th>
             <th class="text-center c-no-warp">
-              煽动方式
-            </th>
-            <th class="text-center c-no-warp">
-              信息来源
-            </th>
-            <th class="text-center c-no-warp">
-              维权方式（QQ群、微信群）
-            </th>
-            <th class="text-center c-no-warp">
-              规模等级（人数）
-            </th>
-            <th class="text-center c-no-warp">
-              上访情况
-            </th>
-            <th class="text-center c-no-warp">
-              是否落实
+              轨迹类型
             </th>
             <th class="text-center c-no-warp">
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;概述&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </th>
-            <th class="text-center c-no-warp">
-              是否造成后果
-            </th>
-            <th class="text-center c-no-warp">
-              是否造成后果（分值）
             </th>
           </tr>
           </thead>
           <tbody>
           <tr *ngFor="let item of sdt.data">
-            <td class="text-center">{{item.groupName}}</td>
+            <td class="text-center">
+              <a href="javascript:;" (click)="forwardEdit(item.pk);"><i class="fa fa-edit fa-fw"></i></a>
+              <a href="javascript:;" (click)="deletePopup(template, item.pk, item.groupName);">
+                <i class="fa fa-trash fa-fw"></i>
+              </a>
+            </td>
+            <td class="text-center">
+              <a href="javascript:;" (click)="forwardDetail(item.pk);">{{item.groupName}}</a>
+            </td>
             <td class="text-center">{{item.recordDate}}</td>
-            <td class="text-center">{{item.score}}</td>
-            <td class="text-center">{{item.petitionLocation}}</td>
             <td class="text-center">{{item.petitionRegion}}</td>
             <td class="text-center">{{item.inciteMethod}}</td>
-            <td class="text-center">{{item.infoSources}}</td>
-            <td class="text-center">{{item.actionGroup}}</td>
-            <td class="text-center">{{item.groupSize}}</td>
-            <td class="text-center">{{item.petitionDynamic}}</td>
-            <td class="text-center">{{item.confirm?'是':'否'}}</td>
-            <td class="text-center">{{item.petitionSituation}}</td>
-            <td class="text-center">{{item.consequence?'是':'否'}}</td>
-            <td class="text-center">{{item.conseScore}}</td>
+            <td *ngIf="item.petitionSituation !== null && item.petitionSituation.length>10" class="text-center">
+              {{item.petitionSituation.substr(0,10)}}
+              <a href="javascript:;" (click)="introPopup(introTemplate, item.petitionSituation);">
+                <i class="fa fa-tag fa-fw"></i>
+              </a>
+            </td>
+            <td *ngIf="item.petitionSituation !== null && item.petitionSituation.length<=10" class="text-center">
+              {{item.petitionSituation}}
+            </td>
+            <td *ngIf="item.petitionSituation === null"></td>
           </tr>
           </tbody>
         </table>
@@ -107,3 +117,32 @@
     </div>
   </div>
 </div>
+<ng-template #template>
+  <div class="modal-header">
+    <h5 class="modal-title pull-left">提示</h5>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body text-center">
+    <label>确定删除 {{deleteName}}?</label>
+  </div>
+  <div class="modal-footer text-center">
+    <button type="button" class="btn btn-default" (click)="confirmDelete()">确定</button>
+    <button type="button" class="btn btn-primary" (click)="modalRef.hide()">取消</button>
+  </div>
+</ng-template>
+<ng-template #introTemplate>
+  <div class="modal-header">
+    <h5 class="modal-title pull-left">上访情况简介</h5>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="introRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body text-center">
+    <label>{{content}}</label>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="introRef.hide()">关闭</button>
+  </div>
+</ng-template>

@@ -1,0 +1,106 @@
+<div class="c-content-inner">
+  <div class="row">
+    <div class="col-md-12">
+      <p class="c-line-title">基础信息</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group row c-ml10">
+        <label class="col-md-8 col-form-label text-left">群体名称：</label>
+        <label class="col-md-8 text-left">{{record.groupName}}</label>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group row c-ml10">
+        <label class="col-md-8 col-form-label text-left">日期：</label>
+        <label class="col-md-8 text-left">{{record.recordDate}}</label>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group row c-ml10">
+        <label class="col-md-12 col-form-label text-left">分数：</label>
+        <label class="col-md-8 text-left">{{record.score === 0?'':record.score}}</label>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group row c-mr10">
+        <label class="col-md-12 col-form-label text-left">规模等级：</label>
+        <label class="col-md-8 text-left">{{record.groupSize === 0?'':record.groupSize}}</label>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group row c-ml10">
+        <label class="col-md-8 col-form-label text-left">轨迹类型：</label>
+        <label class="col-md-8 text-left">{{record.inciteMethod}}</label>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group row c-ml10">
+        <label class="col-md-8 col-form-label text-left">上访地点：</label>
+        <label class="col-md-8 text-left">{{record.petitionLocation}}</label>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group row c-ml10">
+        <label class="col-md-8 col-form-label text-left">上访区域：</label>
+        <label class="col-md-8 text-left">{{record.petitionRegion}}</label>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group row c-ml10">
+        <label class="col-md-8 col-form-label text-left">上访动态：</label>
+        <label class="col-md-8 text-left">{{record.petitionDynamic}}</label>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group row c-ml10">
+        <label class="col-md-8 col-form-label text-left">是否落实：</label>
+        <label class="col-md-8 text-left">{{record.confirm?'是':'否'}}</label>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group row c-ml10">
+        <label class="col-md-8 col-form-label text-left">信息来源：</label>
+        <label class="col-md-8 text-left">{{record.infoSources}}</label>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group row c-ml10">
+        <label class="col-md-8 col-form-label text-left">维权方式：</label>
+        <label class="col-md-8 text-left">{{record.actionGroup}}</label>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group row c-ml10">
+        <label class="col-md-8 col-form-label text-left">是否造成后果：</label>
+        <label class="col-md-8 text-left">{{record.consequence?'是':'否'}}</label>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group row c-ml10">
+        <label class="col-md-8 col-form-label text-left">造成后果分数：</label>
+        <label class="col-md-8 text-left">{{record.conseScore === 0?'':record.conseScore}}</label>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="form-group row c-ml10">
+        <label class="col-md-7 col-form-label text-left">上访情况简介：</label>
+        <label class="col-md-8 text-left">{{record.petitionSituation}}</label>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="c-content-inner c-mt10">
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 c-mt10">
+      <div class="form-group row c-ml10">
+        <div class="col-md-9">
+          <button class="col-md-12 btn btn-primary" (click)="goList();">返回</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+</div>

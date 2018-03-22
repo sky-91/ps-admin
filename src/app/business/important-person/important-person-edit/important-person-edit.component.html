@@ -1,0 +1,247 @@
+<form [formGroup]="infoForm">
+  <div class="c-content-inner c-font-bold">
+    <div class="row">
+      <div class="col-md-8">
+        <p class="c-line-title">基础信息</p>
+      </div>
+      <div class="col-md-4 text-right">
+        <button class="col-md-2 btn btn-primary" (click)="goList();">返回
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group row c-ml10">
+          <label class="col-md-8 col-form-label text-left"><span class="c-text-required">*</span>姓名：</label>
+          <div class="col-md-9">
+            <input formControlName="name" type="text" maxlength="20" class="form-control" value="{{person.name}}"
+                   placeholder="必填项">
+            <div class="c-validator-invalid"
+                 [hidden]="!(infoForm.controls['name'].errors && infoForm.controls['name'].dirty)">
+              姓名必填，1-20位！
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group row c-ml10">
+          <label class="col-md-8 col-form-label text-left"><span class="c-text-required">*</span>身份证：</label>
+          <div class="col-md-9">
+            <input formControlName="idCard" [readonly]="isEdit" type="text" (keypress)="onKeyPress($event)"
+                   value="{{person.idCard}}" class="form-control" placeholder="必填项">
+            <div class="c-validator-invalid"
+                 [hidden]="!(infoForm.controls['idCard'].errors && infoForm.controls['idCard'].dirty)">
+              18位身份证验证错误！
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group row c-ml10">
+          <label class="col-md-12 col-form-label text-left">性别：</label>
+          <div class="col-md-12">
+            <select class="c-w-8 c-fix-h-2 form-control" [(ngModel)]="person.sex" [ngModelOptions]="{standalone: true}">
+              <option value="false">女</option>
+              <option value="true">男</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group row c-mr10">
+          <label class="col-md-12 col-form-label text-left">年龄：</label>
+          <div class="col-md-8">
+            <input [(ngModel)]="person.age" [ngModelOptions]="{standalone: true}" type="number" min="1" max="150" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group row c-ml10">
+          <label class="col-md-8 col-form-label text-left">手机号码：</label>
+          <div class="col-md-9">
+            <input [(ngModel)]="person.phoneText" [ngModelOptions]="{standalone: true}" maxlength="100" type="text" class="form-control" placeholder="多个以|分割">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group row c-ml10">
+          <label class="col-md-8 col-form-label text-left">微信号：</label>
+          <div class="col-md-9">
+            <input [(ngModel)]="person.wechatNameText" [ngModelOptions]="{standalone: true}" maxlength="100" type="text" class="form-control" placeholder="多个以|分割">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group row c-ml10">
+          <label class="col-md-8 col-form-label text-left">婚姻状况：</label>
+          <div class="col-md-9">
+            <input [(ngModel)]="person.maritalStatus" [ngModelOptions]="{standalone: true}" maxlength="2" type="text" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group row c-ml10">
+          <label class="col-md-8 col-form-label text-left">户籍地：</label>
+          <div class="col-md-10">
+            <input [(ngModel)]="person.domicile" [ngModelOptions]="{standalone: true}" maxlength="50" type="text" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group row c-ml10">
+          <label class="col-md-8 col-form-label text-left">现住地：</label>
+          <div class="col-md-10">
+            <input [(ngModel)]="person.residence" [ngModelOptions]="{standalone: true}" maxlength="50" type="text" class="form-control">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-content-inner c-font-bold c-mt10">
+    <div class="row">
+      <div class="col-md-12">
+        <p class="c-line-title">个人背景</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group row c-ml10">
+          <label class="col-md-8 col-form-label text-left">民族：</label>
+          <div class="col-md-9">
+            <input [(ngModel)]="person.nation" [ngModelOptions]="{standalone: true}" maxlength="5" type="text" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group row c-ml10">
+          <label class="col-md-8 col-form-label text-left">学历：</label>
+          <div class="col-md-9">
+            <input [(ngModel)]="person.education" [ngModelOptions]="{standalone: true}" maxlength="5" type="text" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group row c-ml10">
+          <label class="col-md-8 col-form-label text-left">兵役状况：</label>
+          <div class="col-md-9">
+            <input [(ngModel)]="person.veteranStatus" [ngModelOptions]="{standalone: true}" maxlength="5" type="text" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group row c-ml10">
+          <label class="col-md-8 col-form-label text-left">职业：</label>
+          <div class="col-md-9">
+            <input [(ngModel)]="person.job" [ngModelOptions]="{standalone: true}" maxlength="5" type="text" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group row c-ml10">
+          <label class="col-md-8 col-form-label text-left">服务处所：</label>
+          <div class="col-md-9">
+            <input [(ngModel)]="person.workPlace" [ngModelOptions]="{standalone: true}" maxlength="50" type="text" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group row c-ml10">
+          <label class="col-md-8 col-form-label text-left">工作状态：</label>
+          <div class="col-md-9">
+            <input [(ngModel)]="person.workStatus" [ngModelOptions]="{standalone: true}" maxlength="2" type="text" class="form-control">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-content-inner c-font-bold c-mt10">
+    <div class="row">
+      <div class="col-md-12">
+        <p class="c-line-title">管控信息</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group row c-ml10">
+          <label class="col-md-8 col-form-label text-left">群体类别：</label>
+          <div class="col-md-9">
+            <input [(ngModel)]="person.groupType" [ngModelOptions]="{standalone: true}" maxlength="5" type="text" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group row c-ml10">
+          <label class="col-md-8 col-form-label text-left">列控关键字：</label>
+          <div class="col-md-9">
+            <input [(ngModel)]="person.controlKeyword" [ngModelOptions]="{standalone: true}" maxlength="10" type="text" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group row c-ml10">
+          <label class="col-md-8 col-form-label text-left">管辖单位：</label>
+          <div class="col-md-9">
+            <input [(ngModel)]="person.jurisdiction" [ngModelOptions]="{standalone: true}" maxlength="10" type="text" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group row c-ml10">
+          <label class="col-md-8 col-form-label text-left">管辖派出所：</label>
+          <div class="col-md-9">
+            <input [(ngModel)]="person.juriPolice" [ngModelOptions]="{standalone: true}" maxlength="10" type="text" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group row c-ml10">
+          <label class="col-md-8 col-form-label text-left">列控事由：</label>
+          <div class="col-md-9">
+            <input [(ngModel)]="person.controlReason" [ngModelOptions]="{standalone: true}" maxlength="50" type="text" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group row c-ml10">
+          <label class="col-md-8 col-form-label text-left">备注：</label>
+          <div class="col-md-9">
+            <input [(ngModel)]="person.remark" [ngModelOptions]="{standalone: true}" maxlength="50" type="text" class="form-control">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-content-inner c-font-bold c-mt10">
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4 c-mt10">
+        <div class="form-group row c-ml10">
+          <div *ngIf="!isEdit" class="col-md-9">
+            <button class="col-md-12 btn btn-primary" [disabled]="!infoForm.valid" (click)="submit(template);">保存
+            </button>
+          </div>
+          <div *ngIf="isEdit" class="col-md-9">
+            <button class="col-md-12 btn btn-primary" [disabled]="!infoForm.valid" (click)="submit(template);">修改
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4"></div>
+    </div>
+  </div>
+</form>
+<ng-template #template>
+  <div class="modal-header">
+    <h5 class="modal-title pull-left">提示</h5>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body text-center">
+    <label>{{person.name}} 提交成功!</label>
+  </div>
+  <div class="modal-footer text-center">
+    <button type="button" class="btn btn-default" (click)="returnHome()">返回首页</button>
+    <button type="button" class="btn btn-primary" (click)="returnList()">返回列表页</button>
+  </div>
+</ng-template>

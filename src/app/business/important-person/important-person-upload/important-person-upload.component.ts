@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AppService} from '../../../app.service';
 import {FileUploader} from 'ng2-file-upload';
-
-const URL = '/importantPerson/upload';
+import {UserBusinessService} from '../../../business-service/user/user-business.service';
 
 @Component({
   selector: 'app-important-person-upload',
@@ -11,12 +10,15 @@ const URL = '/importantPerson/upload';
 })
 export class ImportantPersonUploadComponent implements OnInit {
 
-  constructor(private appService: AppService) {
+  URL: string = this.userBusinessService.uploadImportantPerson();
+
+  constructor(private appService: AppService,
+              private userBusinessService: UserBusinessService) {
     this.appService.titleEventEmitter.emit('重点人员底库导入');
   }
 
   public uploader: FileUploader = new FileUploader({
-    allowedFileType: ['xls', 'xlsx'], queueLimit: 1, url: URL
+    allowedFileType: ['xls', 'xlsx'], queueLimit: 1, url: this.URL
   });
 
   ngOnInit() {

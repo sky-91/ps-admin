@@ -15,7 +15,7 @@ export class RoleListComponent {
 
   param: any = {};
 
-  pageList: Array<number> = [15, 25, 35];
+  pageList: Array<number> = [15, 25, 50, 100];
 
   constructor(private appService: AppService) {
     this.appService.titleEventEmitter.emit('角色列表');

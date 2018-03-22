@@ -7,29 +7,100 @@
   <div class="row">
     <div class="col-md-4">
       <div class="form-group row">
-        <label class="col-md-4 col-form-label text-right">管辖单位：</label>
-        <div class="col-md-6">
-          <input type="text" class="form-control" placeholder="请输入...">
+        <label class="col-md-5 col-form-label text-right">列控关键字：</label>
+        <div class="col-md-7">
+          <input [(ngModel)]="controlKeyword" type="text" class="form-control" placeholder="请输入...">
         </div>
       </div>
     </div>
-    <!--<div class="col-md-4">-->
-    <!--<div class="form-group row">-->
-    <!--<label class="col-md-3 col-form-label text-right">邮箱：</label>-->
-    <!--<div class="col-md-9">-->
-    <!--<input type="text" class="form-control" placeholder="请输入姓名...">-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
     <div class="col-md-4">
-      <div class="form-group">
-        <button class="btn btn-primary" (click)="search();"><i class="fa fa-search fa-fw"></i> 查询</button>
+      <div class="form-group row">
+        <label class="col-md-5 col-form-label text-right">群体类别：</label>
+        <div class="col-md-7">
+          <input [(ngModel)]="groupType" type="text" class="form-control" placeholder="请输入...">
+        </div>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <p class="c-line-title"></p>
+    <div class="col-md-4">
+      <div class="form-group row">
+        <label class="col-md-5 col-form-label text-right">身份证号：</label>
+        <div class="col-md-7">
+          <input [(ngModel)]="idCard" type="text" class="form-control" placeholder="请输入...">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group row">
+        <label class="col-md-5 col-form-label text-right">姓名：</label>
+        <div class="col-md-7">
+          <input [(ngModel)]="name" type="text" class="form-control" placeholder="请输入...">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group row">
+        <label class="col-md-5 col-form-label text-right">手机：</label>
+        <div class="col-md-7">
+          <input [(ngModel)]="phoneText" type="text" class="form-control" placeholder="请输入...">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group row">
+        <label class="col-md-5 col-form-label text-right">微信：</label>
+        <div class="col-md-7">
+          <input [(ngModel)]="wechatNameText" type="text" class="form-control" placeholder="请输入...">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group row">
+        <label class="col-md-5 col-form-label text-right">管辖单位：</label>
+        <div class="col-md-7">
+          <input [(ngModel)]="jurisdiction" type="text" class="form-control" placeholder="请输入...">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group row">
+        <label class="col-md-5 col-form-label text-right">管辖派出所：</label>
+        <div class="col-md-7">
+          <input [(ngModel)]="juriPolice" type="text" class="form-control" placeholder="请输入...">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group row">
+        <label class="col-md-5 col-form-label text-right">性别：</label>
+        <div class="col-md-7">
+          <select class="c-w-4 c-fix-h-2 form-control" [(ngModel)]="sex">
+            <option value="">全部</option>
+            <option value="true">男</option>
+            <option value="false">女</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="form-group row">
+        <label class="col-md-4 col-form-label text-right">年龄：</label>
+        <div class="col-md-8">
+          <input [(ngModel)]="startAge" type="number" min="1" max="150" class="form-control col-md-5 c-input-inline"
+                 placeholder="起始年龄">
+          <label class="col-md-2 c-input-inline text-center c-mt5">至</label>
+          <input [(ngModel)]="endAge" type="number" min="1" max="150" class="form-control col-md-5 c-input-inline"
+                 placeholder="终止年龄">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="form-group text-left">
+        <button class="btn btn-primary" (click)="search();"><i class="fa fa-search fa-fw"></i> 查询</button>
+        <label class="c-w-1-6"></label>
+        <button class="btn btn-outline-primary" (click)="export();"><i class="fa fa-download fa-fw"></i> 导出</button>
+        <label class="c-w-1-6"></label>
+        <button class="btn btn-outline-light" (click)="clear();"><i class="fa fa-refresh fa-fw"></i> 清空</button>
+      </div>
     </div>
   </div>
   <div class="row">
@@ -38,6 +109,9 @@
         <table class="table table-bordered">
           <thead>
           <tr>
+            <th class="text-center c-no-warp">
+              &nbsp;&nbsp;操作&nbsp;&nbsp;
+            </th>
             <th class="text-center c-no-warp">
               列控关键字
             </th>
@@ -51,19 +125,10 @@
               &nbsp;&nbsp;姓名&nbsp;&nbsp;
             </th>
             <th class="text-center c-no-warp">
-              婚姻状况
-            </th>
-            <th class="text-center c-no-warp">
-              户籍地
-            </th>
-            <th class="text-center c-no-warp">
-              &nbsp;&nbsp;&nbsp;&nbsp;现住地&nbsp;&nbsp;&nbsp;&nbsp;
-            </th>
-            <th class="text-center c-no-warp">
               联系方式
             </th>
             <th class="text-center c-no-warp">
-              手机绑定微信名称
+              微信名称
             </th>
             <th class="text-center c-no-warp">
               管辖单位
@@ -75,57 +140,32 @@
               性别
             </th>
             <th class="text-center c-no-warp">
-              &nbsp;&nbsp;民族&nbsp;&nbsp;
-            </th>
-            <th class="text-center c-no-warp">
               年龄
-            </th>
-            <th class="text-center c-no-warp">
-              &nbsp;&nbsp;学历&nbsp;&nbsp;
-            </th>
-            <th class="text-center c-no-warp">
-              兵役状况
-            </th>
-            <th class="text-center c-no-warp">
-              &nbsp;&nbsp;职业&nbsp;&nbsp;
-            </th>
-            <th class="text-center c-no-warp">
-              服务处所
-            </th>
-            <th class="text-center c-no-warp">
-              工作状态
-            </th>
-            <th class="text-center c-no-warp">
-              列控事由
-            </th>
-            <th class="text-center c-no-warp">
-              &nbsp;&nbsp;备注&nbsp;&nbsp;
             </th>
           </tr>
           </thead>
           <tbody>
           <tr *ngFor="let item of sdt.data">
-            <td class="text-center">{{item.controllKeyword}}</td>
+            <td class="text-center">
+              <a href="javascript:;" (click)="forwardEdit(item.idCard);"><i class="fa fa-edit fa-fw"></i></a>
+              <a href="javascript:;" (click)="deletePopup(template, item.idCard, item.name);">
+                <i class="fa fa-trash fa-fw"></i>
+              </a>
+            </td>
+            <td class="text-center">{{item.controlKeyword}}</td>
             <td class="text-center">{{item.groupType}}</td>
-            <td class="text-center">{{item.idCard}}</td>
-            <td class="text-center">{{item.name}}</td>
-            <td class="text-center">{{item.maritalStatus}}</td>
-            <td class="text-center">{{item.domicile}}</td>
-            <td class="text-center">{{item.residence}}</td>
-            <td class="text-center">{{item.contacts[0].phone}}</td>
-            <td class="text-center">{{item.contacts[0].wechat}}</td>
+            <td class="text-center">
+              <a href="javascript:;" (click)="forwardDetail(item.idCard);">{{item.idCard}}</a>
+            </td>
+            <td class="text-center">
+              <a href="javascript:;" (click)="forwardDetail(item.idCard);">{{item.name}}</a>
+            </td>
+            <td class="text-center">{{item.phoneText}}</td>
+            <td class="text-center">{{item.wechatNameText}}</td>
             <td class="text-center">{{item.jurisdiction}}</td>
             <td class="text-center">{{item.juriPolice}}</td>
             <td class="text-center">{{item.sex?'男':'女'}}</td>
-            <td class="text-center">{{item.nation}}</td>
             <td class="text-center">{{item.age}}</td>
-            <td class="text-center">{{item.education}}</td>
-            <td class="text-center">{{item.veteranStatus}}</td>
-            <td class="text-center">{{item.job}}</td>
-            <td class="text-center">{{item.workPlace}}</td>
-            <td class="text-center">{{item.workStatus}}</td>
-            <td class="text-center">{{item.controllReason}}</td>
-            <td class="text-center">{{item.remark}}</td>
           </tr>
           </tbody>
         </table>
@@ -135,3 +175,18 @@
     </div>
   </div>
 </div>
+<ng-template #template>
+  <div class="modal-header">
+    <h5 class="modal-title pull-left">提示</h5>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body text-center">
+    <label>确定删除 {{deleteName}}?</label>
+  </div>
+  <div class="modal-footer text-center">
+    <button type="button" class="btn btn-default" (click)="confirmDelete()">确定</button>
+    <button type="button" class="btn btn-primary" (click)="modalRef.hide()">取消</button>
+  </div>
+</ng-template>

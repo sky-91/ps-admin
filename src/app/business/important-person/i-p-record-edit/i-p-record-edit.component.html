@@ -1,5 +1,30 @@
 <form [formGroup]="recordForm">
-  <div class="c-content-inner c-font-bold">
+  <div class="c-content-inner">
+    <div class="row">
+      <div class="col-md-8">
+        <p class="c-line-title">搜索信息</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 c-ml10">
+        <p class="c-text-tip">轨迹积分记录必须对应到一条重点人员底库信息。</p>
+        <p class="c-text-tip">请先输入身份证查询到底库信息后再进行输入操作。</p>
+      </div>
+      <div class="col-md-8">
+        <div class="form-group row c-ml10">
+          <label class="col-md-2 col-form-label text-left">身份证：</label>
+          <div class="col-md-4">
+            <input [(ngModel)]="searchId" [ngModelOptions]="{standalone: true}" maxlength="18" type="text"
+                   class="form-control">
+          </div>
+          <div class="col-md-2">
+            <button class="col-md-12 btn btn-primary" (click)="searchInfo();">搜索</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-content-inner c-mt10 c-font-bold">
     <div class="row">
       <div class="col-md-8">
         <p class="c-line-title">基础信息</p>
@@ -13,7 +38,8 @@
         <div class="form-group row c-ml10">
           <label class="col-md-8 col-form-label text-left"><span class="c-text-required">*</span>姓名：</label>
           <div class="col-md-9">
-            <input formControlName="name" type="text" maxlength="20" class="form-control" value="{{record.name}}"
+            <input formControlName="name" [readonly]="true" type="text" maxlength="20" class="form-control"
+                   value="{{record.name}}"
                    placeholder="必填项">
             <div class="c-validator-invalid"
                  [hidden]="!(recordForm.controls['name'].errors && recordForm.controls['name'].dirty)">
@@ -26,7 +52,7 @@
         <div class="form-group row c-ml10">
           <label class="col-md-8 col-form-label text-left"><span class="c-text-required">*</span>身份证：</label>
           <div class="col-md-9">
-            <input formControlName="idCard" [readonly]="isEdit" type="text" (keypress)="onKeyPress($event)"
+            <input formControlName="idCard" [readonly]="true" type="text" (keypress)="onKeyPress($event)"
                    value="{{record.idCard}}" class="form-control" placeholder="必填项">
             <div class="c-validator-invalid"
                  [hidden]="!(recordForm.controls['idCard'].errors && recordForm.controls['idCard'].dirty)">

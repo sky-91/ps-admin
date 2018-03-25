@@ -19,6 +19,8 @@ import {ToastConfig, ToastType} from '../../../shared/toast/toast-model';
 })
 export class IPRecordEditComponent implements OnInit {
 
+  searchId: string;
+
   recordForm: FormGroup;
   modalRef: BsModalRef;
   modalConfig = {
@@ -63,6 +65,32 @@ export class IPRecordEditComponent implements OnInit {
         if (successful && data.httpStatus === undefined) {
           that.record = data;
           that.isEdit = true;
+          const nameControl = that.recordForm.get('name');
+          nameControl.setValue(that.record.name);
+          const idControl = that.recordForm.get('idCard');
+          idControl.setValue(that.record.idCard);
+        } else if (data.httpStatus !== undefined && data.httpStatus > 300) {
+          const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+          that.toastService.toast(toastCfg);
+        } else {
+          const toastCfg = new ToastConfig(ToastType.ERROR, '', '请求已发送，服务器未知错误', 3000);
+          that.toastService.toast(toastCfg);
+        }
+      }, function (successful, msg, err) {
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', msg, 3000);
+        that.toastService.toast(toastCfg);
+        console.log(err);
+      });
+    }
+  }
+
+  searchInfo() {
+    const that = this;
+    if (this.searchId !== null && this.searchId !== '' && this.searchId.length === 18) {
+      this.httpService.get(this.userBusinessService.getImportantPerson() + this.searchId, null, function (successful, data, res) {
+        if (successful && data.httpStatus === undefined) {
+          that.record.idCard = data.idCard;
+          that.record.name = data.name;
           const nameControl = that.recordForm.get('name');
           nameControl.setValue(that.record.name);
           const idControl = that.recordForm.get('idCard');

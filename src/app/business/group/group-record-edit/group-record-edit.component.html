@@ -1,4 +1,29 @@
 <form [formGroup]="recordForm">
+  <div class="c-content-inner">
+    <div class="row">
+      <div class="col-md-8">
+        <p class="c-line-title">搜索信息</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 c-ml10">
+        <p class="c-text-tip">轨迹积分记录必须对应到一条群体信息。</p>
+        <p class="c-text-tip">请先输入群体名称查询到群体信息后再进行输入操作。</p>
+      </div>
+      <div class="col-md-8">
+        <div class="form-group row c-ml10">
+          <label class="col-md-2 col-form-label text-left">群体名称：</label>
+          <div class="col-md-4">
+            <input [(ngModel)]="searchName" [ngModelOptions]="{standalone: true}" maxlength="18" type="text"
+                   class="form-control">
+          </div>
+          <div class="col-md-2">
+            <button class="col-md-12 btn btn-primary" (click)="searchInfo();">搜索</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="c-content-inner c-font-bold">
     <div class="row">
       <div class="col-md-8">
@@ -14,7 +39,7 @@
         <div class="form-group row c-ml10">
           <label class="col-md-8 col-form-label text-left"><span class="c-text-required">*</span>群体名称：</label>
           <div class="col-md-9">
-            <input formControlName="groupName" [readonly]="isEdit" type="text" maxlength="30" class="form-control"
+            <input formControlName="groupName" [readonly]="true" type="text" maxlength="30" class="form-control"
                    value="{{record.groupName}}"
                    placeholder="必填项">
             <div class="c-validator-invalid"

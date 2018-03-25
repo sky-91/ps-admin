@@ -19,6 +19,8 @@ import {ToastConfig, ToastType} from '../../../shared/toast/toast-model';
 })
 export class GroupRecordEditComponent implements OnInit {
 
+  searchName: string;
+
   recordForm: FormGroup;
   modalRef: BsModalRef;
   modalConfig = {
@@ -61,6 +63,29 @@ export class GroupRecordEditComponent implements OnInit {
         if (successful && data.httpStatus === undefined) {
           that.record = data;
           that.isEdit = true;
+          const groupNameControl = that.recordForm.get('groupName');
+          groupNameControl.setValue(that.record.groupName);
+        } else if (data.httpStatus !== undefined && data.httpStatus > 300) {
+          const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+          that.toastService.toast(toastCfg);
+        } else {
+          const toastCfg = new ToastConfig(ToastType.ERROR, '', '请求已发送，服务器未知错误', 3000);
+          that.toastService.toast(toastCfg);
+        }
+      }, function (successful, msg, err) {
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', msg, 3000);
+        that.toastService.toast(toastCfg);
+        console.log(err);
+      });
+    }
+  }
+
+  searchInfo() {
+    const that = this;
+    if (this.searchName !== null && this.searchName !== '') {
+      this.httpService.get(this.userBusinessService.getGroupSummary() + this.searchName, null, function (successful, data, res) {
+        if (successful && data.httpStatus === undefined) {
+          that.record.groupName = data.groupName;
           const groupNameControl = that.recordForm.get('groupName');
           groupNameControl.setValue(that.record.groupName);
         } else if (data.httpStatus !== undefined && data.httpStatus > 300) {

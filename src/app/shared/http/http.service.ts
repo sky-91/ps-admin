@@ -3,6 +3,9 @@ import {Headers, Http, RequestMethod, RequestOptions, RequestOptionsArgs, URLSea
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Utils} from '../util/utils';
 import {SpinService} from '../spin/spin.service';
+import {Router} from '@angular/router';
+import {ToastConfig, ToastType} from '../toast/toast-model';
+import {ToastService} from '../toast/toast.service';
 
 
 /**
@@ -13,7 +16,9 @@ export class HttpService {
 
   constructor(private httpClient: HttpClient,
               private http: Http,
-              private spinService: SpinService) {
+              private router: Router,
+              private spinService: SpinService,
+              private toastService: ToastService) {
   }
 
   /**
@@ -71,6 +76,11 @@ export class HttpService {
   public request(url: string, options: RequestOptionsArgs, success: Function, error: Function): any {
     this.spinService.spin(true);
     this.http.request(url, options).subscribe(res => {
+      if (res.url.search('login') >= 0) {
+        this.router.navigate(['/login']);
+        const toastCfg = new ToastConfig(ToastType.WARNING, '', '登录状态失效，请重新登录！', 3000);
+        this.toastService.toast(toastCfg);
+      }
       this.spinService.spin(false);
       success(res.ok, res.json(), res);
     }, err => {

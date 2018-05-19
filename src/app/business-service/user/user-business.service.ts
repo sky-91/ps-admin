@@ -3,6 +3,8 @@ import {Injectable} from '@angular/core';
 @Injectable()
 export class UserBusinessService {
 
+  contextPath = '/policesys';
+
   constructor() {
   }
 
@@ -10,146 +12,146 @@ export class UserBusinessService {
    * 登录
    */
   login() {
-    return '/login/submit';
+    return this.contextPath + '/login/submit';
   }
 
   saveSpecialPerson() {
-    return '/person/save';
+    return this.contextPath + '/person/save';
   }
 
   updateSpecialPerson() {
-    return '/person/update';
+    return this.contextPath + '/person/update';
   }
 
   getSpecialPerson() {
-    return '/person/getById/';
+    return this.contextPath + '/person/getById/';
   }
 
   listSpecialPerson() {
-    return '/person/listForPage';
+    return this.contextPath + '/person/listForPage';
   }
 
   uploadSpecialPerson() {
-    return '/person/upload';
+    return this.contextPath + '/person/upload';
   }
 
   exportSpecialPerson() {
-    return '/person/export';
+    return this.contextPath + '/person/export';
   }
 
   deleteSpecialPerson() {
-    return '/person/deleteById/';
+    return this.contextPath + '/person/deleteById/';
   }
 
   saveImportantPerson() {
-    return '/importantPerson/save';
+    return this.contextPath + '/importantPerson/save';
   }
 
   updateImportantPerson() {
-    return '/importantPerson/update';
+    return this.contextPath + '/importantPerson/update';
   }
 
   getImportantPerson() {
-    return '/importantPerson/getById/';
+    return this.contextPath + '/importantPerson/getById/';
   }
 
   listImportantPerson() {
-    return '/importantPerson/listForPage';
+    return this.contextPath + '/importantPerson/listForPage';
   }
 
   uploadImportantPerson() {
-    return '/importantPerson/upload';
+    return this.contextPath + '/importantPerson/upload';
   }
 
   exportImportantPerson() {
-    return '/importantPerson/export';
+    return this.contextPath + '/importantPerson/export';
   }
 
   deleteImportantPerson() {
-    return '/importantPerson/deleteById/';
+    return this.contextPath + '/importantPerson/deleteById/';
   }
 
   savePersonRecord() {
-    return '/importantPerson/record/save';
+    return this.contextPath + '/importantPerson/record/save';
   }
 
   updatePersonRecord() {
-    return '/importantPerson/record/update';
+    return this.contextPath + '/importantPerson/record/update';
   }
 
   getPersonRecord() {
-    return '/importantPerson/record/getByPk/';
+    return this.contextPath + '/importantPerson/record/getByPk/';
   }
 
   listPersonRecord() {
-    return '/importantPerson/record/listForPage';
+    return this.contextPath + '/importantPerson/record/listForPage';
   }
 
   uploadPersonRecord() {
-    return '/importantPerson/record/upload';
+    return this.contextPath + '/importantPerson/record/upload';
   }
 
   exportPersonRecord() {
-    return '/importantPerson/record/export';
+    return this.contextPath + '/importantPerson/record/export';
   }
 
   deletePersonRecord() {
-    return '/importantPerson/record/deleteByPk/';
+    return this.contextPath + '/importantPerson/record/deleteByPk/';
   }
 
   saveGroupSummary() {
-    return '/group/groupSummary/save';
+    return this.contextPath + '/group/groupSummary/save';
   }
 
   updateGroupSummary() {
-    return '/group/groupSummary/update';
+    return this.contextPath + '/group/groupSummary/update';
   }
 
   getGroupSummary() {
-    return '/group/groupSummary/getByName/';
+    return this.contextPath + '/group/groupSummary/getByName/';
   }
 
   listGroupSummary() {
-    return '/group/groupSummary/listForPage';
+    return this.contextPath + '/group/groupSummary/listForPage';
   }
 
   uploadGroupSummary() {
-    return '/group/groupSummary/upload';
+    return this.contextPath + '/group/groupSummary/upload';
   }
 
   exportGroupSummary() {
-    return '/group/groupSummary/export';
+    return this.contextPath + '/group/groupSummary/export';
   }
 
   deleteGroupSummary() {
-    return '/group/groupSummary/deleteByName/';
+    return this.contextPath + '/group/groupSummary/deleteByName/';
   }
 
   saveGroupRecord() {
-    return '/group/groupRecord/save';
+    return this.contextPath + '/group/groupRecord/save';
   }
 
   updateGroupRecord() {
-    return '/group/groupRecord/update';
+    return this.contextPath + '/group/groupRecord/update';
   }
 
   getGroupRecord() {
-    return '/group/groupRecord/getByPk/';
+    return this.contextPath + '/group/groupRecord/getByPk/';
   }
 
   listGroupRecord() {
-    return '/group/groupRecord/listForPage';
+    return this.contextPath + '/group/groupRecord/listForPage';
   }
 
   uploadGroupRecord() {
-    return '/group/groupRecord/upload';
+    return this.contextPath + '/group/groupRecord/upload';
   }
 
   exportGroupRecord() {
-    return '/group/groupRecord/export';
+    return this.contextPath + '/group/groupRecord/export';
   }
 
   deleteGroupRecord() {
-    return '/group/groupRecord/deleteByPk/';
+    return this.contextPath + '/group/groupRecord/deleteByPk/';
   }
 }
